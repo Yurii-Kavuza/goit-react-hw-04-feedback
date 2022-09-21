@@ -9,6 +9,10 @@ export const Buttons = styled.div`
 export const Button = styled.button`
   cursor: pointer;
   border-radius: ${p => p.theme.radii.normal};
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: ${p => p.theme.space[2]}px;
 
   :hover {
     background-color: ${p => p.theme.colors.secondary};
