@@ -24,17 +24,14 @@ class App extends React.Component {
 
   handleFeedback = e => {
     const choise = e.target.dataset.value;
-    this.setState(
-      prevState => ({
-        [choise]: prevState[choise] + 1,
-      }),
-      this.countTotalFeedback
-    );
+    this.setState(prevState => ({
+      [choise]: prevState[choise] + 1,
+    }));
   };
 
   countTotalFeedback = () => {
     const values = Object.values(this.state);
-    const totalScore = values.reduce((total, value) => total + value);
+    const totalScore = values.reduce((total, value) => total + value, 0);
     return totalScore;
   };
 
@@ -43,6 +40,10 @@ class App extends React.Component {
   };
 
   render() {
+    const { good, bad, neutral } = this.state;
+    const total = this.countTotalFeedback();
+    const positivePercentage = this.countPositiveFeedbackPercentage();
+
     return (
       <>
         <Section title={'Please leave feadback'}>
@@ -52,15 +53,15 @@ class App extends React.Component {
           />
         </Section>
         <Section title={'Statistics:'}>
-          {this.countTotalFeedback() === 0 ? (
+          {total === 0 ? (
             <Notification message={'There is no feedback'} />
           ) : (
             <Statistics
-              good={this.state.good}
-              bad={this.state.bad}
-              neutral={this.state.neutral}
-              total={this.countTotalFeedback()}
-              positivePercentage={this.countPositiveFeedbackPercentage()}
+              good={good}
+              bad={bad}
+              neutral={neutral}
+              total={total}
+              positivePercentage={positivePercentage}
             />
           )}
         </Section>
