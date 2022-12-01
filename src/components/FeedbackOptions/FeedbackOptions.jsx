@@ -29,7 +29,7 @@ const FeedbackOptions = ({ options, onLeaveFeedback }) => (
 
 FeedbackOptions.propTypes = {
   options: PropTypes.array,
-  ratingIncrement: PropTypes.func,
+  onLeaveFeedback: PropTypes.func,
 };
 
 function capitalizeFirstLetter(str) {
